@@ -1,149 +1,2159 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Joyería Itzayana</title>
-    <!-- Tailwind CSS para diseño elegante y rápido -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
-    <style>
-        body { font-family: 'Montserrat', sans-serif; background-color: #ffffff; color: #000000; }
-        h1 { font-family: 'Cinzel', serif; }
-        .border-teal-custom { border: 1px solid #008080; }
-        .btn-whatsapp { background-color: #25D366; color: white; border-radius: 9999px; }
-    </style>
-</head>
-<body class="bg-white text-black min-h-screen flex flex-col items-center p-4">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#102f2d">
+  <title>Joyería Itzayana | Piezas únicas, elegancia atemporal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
 
-    <!-- Encabezado -->
-    <header class="w-full text-center py-6 border-b border-gray-100">
-        <h1 class="text-3xl md:text-5xl tracking-widest uppercase font-bold text-black">Joyería Itzayana</h1>
+  <style>
+    :root {
+      --ink: #102f2d;
+      --ink-deep: #0b2927;
+      --gold: #c99b4b;
+      --gold-dark: #ae8138;
+	  /* Color texto etiqueta */
+      --paper: #1C1C1C;
+      --paper-light: #fdfbf8;
+      --muted: #71817e;
+      --line: rgba(16, 47, 45, .13);
+      --shadow: 0 8px 24px rgba(16, 47, 45, .07);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 5% 92%, rgba(201,155,75,.08), transparent 28rem),
+        radial-gradient(circle at 100% 0%, rgba(16,47,45,.07), transparent 32rem),
+        var(--paper-light);
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 400;
+    }
+    button, a { font: inherit; }
+    button { cursor: pointer; }
+    .page-shell { width: min(1440px, 100%); margin: 0 auto; padding: 0 28px; }
+
+    /* Encabezado */
+    .site-header {
+      position: relative;
+      text-align: center;
+      padding: 76px 76px 38px;
+    }
+    .brand {
+      margin: 0;
+      color: var(--ink-deep);
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: clamp(3.3rem, 7vw, 6.1rem);
+      font-weight: 600;
+      letter-spacing: .16em;
+      line-height: .78;
+      text-transform: uppercase;
+    }
+    .brand span { display: block; }
+    .brand span + span { margin-top: 12px; }
+    .brand-rule {
+      width: 130px;
+      height: 3px;
+      margin: 34px auto 14px;
+      background: var(--gold);
+    }
+    .tagline {
+      margin: 0;
+      color: var(--muted);
+      font-size: .91rem;
+      font-weight: 300;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+    }
+    .cart-float {
+      position: fixed;
+      z-index: 30;
+      top: 28px;
+      right: 32px;
+      display: grid;
+      width: 72px;
+      height: 72px;
+      place-items: center;
+      color: var(--gold);
+      background: var(--ink-deep);
+      border: 0;
+      border-radius: 50%;
+      box-shadow: 0 8px 20px rgba(0,0,0,.14);
+      transition: transform .2s, background .2s;
+    }
+    .cart-float:hover { transform: translateY(-2px); background: #17413d; }
+    .cart-float svg { width: 27px; height: 27px; }
+    .cart-count {
+      position: absolute;
+      top: -3px;
+      right: -3px;
+      display: grid;
+      min-width: 22px;
+      height: 22px;
+      padding: 0 5px;
+      place-items: center;
+      color: var(--ink);
+      background: var(--gold);
+      border: 2px solid var(--paper-light);
+      border-radius: 99px;
+      font-size: .7rem;
+      font-weight: 600;
+    }
+    .cart-count[hidden] { display: none; }
+
+    /* Botón e Icono Sidebar superior izquierda */
+    .menu-float {
+      position: fixed;
+      z-index: 30;
+      top: 28px;
+      left: 32px;
+      display: grid;
+      width: 72px;
+      height: 72px;
+      place-items: center;
+      color: var(--gold);
+      background: var(--ink-deep);
+      border: 0;
+      border-radius: 50%;
+      box-shadow: 0 8px 20px rgba(0,0,0,.14);
+      transition: transform .2s, background .2s;
+    }
+    .menu-float:hover { transform: translateY(-2px); background: #17413d; }
+    .menu-float svg { width: 27px; height: 27px; }
+
+    /* Sidebar de Navegación y Filtros */
+    .sidebar-overlay {
+      position: fixed;
+      z-index: 60;
+      inset: 0;
+      display: flex;
+      justify-content: flex-start;
+      background: rgba(5,20,19,.55);
+      transition: opacity .2s;
+    }
+    .sidebar-overlay[hidden] { display: none; }
+    .sidebar-panel {
+      display: flex;
+      width: min(340px, 100%);
+      height: 100%;
+      flex-direction: column;
+      padding: 24px;
+      background: var(--paper-light);
+      box-shadow: 12px 0 35px rgba(0,0,0,.15);
+      animation: slide-in-left .22s ease-out;
+      overflow-y: auto;
+    }
+    @keyframes slide-in-left { from { transform: translateX(-35px); opacity: .6; } to { transform: translateX(0); opacity: 1; } }
+    .sidebar-heading {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--line);
+    }
+    .sidebar-heading h2 {
+      margin: 0;
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 2rem;
+      font-weight: 600;
+    }
+    .sidebar-section-title {
+      margin: 24px 0 12px;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+      font-weight: 600;
+    }
+    .category-nav {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .tab-btn {
+      width: 100%;
+      text-align: left;
+      padding: 12px 16px;
+      color: var(--muted);
+      background: transparent;
+      border: 0;
+      border-radius: 8px;
+      font-size: .96rem;
+      letter-spacing: .08em;
+      transition: color .2s, background .2s, box-shadow .2s;
+    }
+    .tab-btn:hover { color: var(--ink); background: rgba(16,47,45,.04); }
+    .tab-btn.active {
+      color: var(--gold);
+      background: var(--ink-deep);
+      box-shadow: 0 5px 12px rgba(16,47,45,.18);
+    }
+
+    /* Filtro de precio en la sidebar */
+    .sort-controls-sidebar {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--line);
+    }
+    .sort-option {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.9rem;
+      color: var(--ink);
+      cursor: pointer;
+    }
+    .sort-option input {
+      accent-color: var(--ink-deep);
+    }
+
+    /* Catálogo */
+    main { min-height: 360px; margin-top: 40px; }
+    .catalog-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 24px;
+      align-items: stretch;
+    }
+    .product-card {
+      display: flex;
+      min-width: 0;
+      flex-direction: column;
+      overflow: hidden;
+      background: #fff;
+      border: 1px solid rgba(16,47,45,.07);
+      border-radius: 2px;
+      box-shadow: 0 2px 7px rgba(16,47,45,.06);
+      transition: transform .22s, box-shadow .22s;
+    }
+    .product-card:hover { transform: translateY(-3px); box-shadow: var(--shadow); }
+    .product-image-wrap {
+      position: relative;
+      overflow: hidden;
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      background: #e9eeeb;
+      cursor: zoom-in;
+    }
+    .product-image {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform .35s;
+    }
+    .product-card:hover .product-image { transform: scale(1.035); }
+    .product-tag {
+      position: absolute;
+      top: 9px;
+      left: 9px;
+      z-index: 2;
+      display: inline-block;
+      max-width: calc(100% - 18px);
+      padding: 4px;
+      overflow: hidden;
+      color: var(--paper);
+	  /* Color fondo etiqueta */
+      background: #E07A5F;
+      font-size: .72rem;
+      line-height: 1.15;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+	  font-weight: 600; /* <-- texto en negrita */
+    }
+    .share-button {
+      position: absolute;
+      top: 9px;
+      right: 9px;
+      z-index: 2;
+      background: rgba(16, 47, 45, 0.75);
+      border: none;
+      color: #fff;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .share-button:hover { background: var(--ink-deep); }
+    .share-button svg { width: 16px; height: 16px; }
+
+    .product-info {
+      display: flex;
+      flex: 1;
+      flex-direction: column;
+      align-items: center;
+      padding: 15px 12px 17px;
+      text-align: center;
+    }
+    .product-sku {
+      margin: 0 0 7px;
+      color: var(--muted);
+      font-size: .7rem;
+      letter-spacing: .1em;
+      overflow-wrap: anywhere;
+    }
+    .product-material {
+      margin: 0 0 8px;
+      color: var(--ink);
+      font-size: .76rem;
+      font-weight: 500;
+    }
+    .product-description {
+      margin: 0 0 12px;
+      color: #6c7774;
+      font-size: .72rem;
+      font-weight: 300;
+      line-height: 1.5;
+      overflow-wrap: anywhere;
+    }
+    .product-bottom {
+      width: 100%;
+      margin-top: auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .product-price {
+      margin: 0 0 13px;
+      color: var(--gold-dark);
+      font-size: 1rem;
+      font-weight: 600;
+    }
+    .old-price {
+      margin-right: 7px;
+      color: #89928f;
+      font-size: .8rem;
+      font-weight: 400;
+      text-decoration: line-through;
+    }
+    .new-price { color: var(--gold-dark); font-size: 1.05rem; font-weight: 700; }
+    .add-button, .whatsapp-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--gold);
+      background: var(--ink-deep);
+      border: 1px solid var(--ink-deep);
+      border-radius: 999px;
+      font-weight: 500;
+      letter-spacing: .04em;
+      text-decoration: none;
+      transition: background .2s, color .2s, transform .2s;
+    }
+    .add-button { width: 100%; max-width: 210px; padding: 10px 12px; font-size: .72rem; }
+    .add-button:hover, .whatsapp-button:hover { color: var(--paper); background: #1a4843; transform: translateY(-1px); }
+    .catalog-message {
+      grid-column: 1 / -1;
+      padding: 70px 12px;
+      color: var(--muted);
+      text-align: center;
+      font-size: .9rem;
+      letter-spacing: .08em;
+    }
+    .catalog-message.error { color: #a34c42; letter-spacing: 0; }
+
+    /* Pie de página */
+    .site-footer {
+      margin: 100px auto 0;
+      padding: 36px 18px 28px;
+      color: var(--paper);
+      background: var(--ink-deep);
+      text-align: center;
+    }
+    .footer-brand {
+      margin: 0 0 10px;
+      color: var(--gold);
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 1.8rem;
+      letter-spacing: .12em;
+    }
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px 28px;
+      margin: 18px 0 22px;
+    }
+    .footer-links button {
+      padding: 4px;
+      color: #e7e4dc;
+      background: transparent;
+      border: 0;
+      border-bottom: 1px solid transparent;
+      font-size: .78rem;
+    }
+    .footer-links button:hover { color: var(--gold); border-color: var(--gold); }
+    .whatsapp-button { padding: 12px 25px; }
+    .copyright { margin: 22px 0 0; color: #aab7b2; font-size: .68rem; }
+
+    /* Carrito lateral */
+    .overlay {
+      position: fixed;
+      z-index: 60;
+      inset: 0;
+      display: flex;
+      justify-content: flex-end;
+      background: rgba(5,20,19,.55);
+      opacity: 1;
+      transition: opacity .2s;
+    }
+    .overlay[hidden] { display: none; }
+    .cart-panel {
+      display: flex;
+      width: min(440px, 100%);
+      height: 100%;
+      flex-direction: column;
+      padding: 24px;
+      background: var(--paper-light);
+      box-shadow: -12px 0 35px rgba(0,0,0,.15);
+      animation: slide-in .22s ease-out;
+    }
+    @keyframes slide-in { from { transform: translateX(35px); opacity: .6; } to { transform: translateX(0); opacity: 1; } }
+    .cart-heading {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--line);
+    }
+    .cart-heading h2 {
+      margin: 0;
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 2rem;
+      font-weight: 600;
+    }
+    .icon-close {
+      width: 36px;
+      height: 36px;
+      color: var(--ink);
+      background: transparent;
+      border: 0;
+      font-size: 1.35rem;
+    }
+    .cart-items { flex: 1; overflow-y: auto; padding: 14px 2px; }
+    .empty-cart { padding: 45px 10px; color: var(--muted); text-align: center; font-size: .85rem; }
+    .cart-item {
+      display: grid;
+      grid-template-columns: 76px minmax(0,1fr) auto;
+      gap: 12px;
+      align-items: center;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--line);
+    }
+    .cart-thumb {
+      width: 76px;
+      height: 76px;
+      object-fit: cover;
+      background: #e9eeeb;
+      cursor: zoom-in;
+    }
+    .cart-item-name { margin: 0 0 4px; font-size: .78rem; font-weight: 600; overflow-wrap: anywhere; }
+    .cart-item-sku { margin: 0 0 5px; color: var(--muted); font-size: .68rem; }
+    .cart-item-price { margin: 0 0 7px; color: var(--gold-dark); font-size: .75rem; }
+    .quantity-control { display: inline-flex; align-items: center; gap: 12px; padding: 3px 7px; border: 1px solid var(--line); }
+    .quantity-control button { width: 20px; color: var(--ink); background: transparent; border: 0; font-size: 1rem; }
+    .quantity-control span { font-size: .75rem; }
+    .cart-item-end { display: flex; flex-direction: column; align-items: flex-end; gap: 8px; }
+    .remove-item { color: #a34c42; background: transparent; border: 0; font-size: .85rem; }
+    .cart-subtotal { font-size: .76rem; font-weight: 600; white-space: nowrap; }
+    .cart-summary { padding-top: 15px; border-top: 1px solid var(--line); }
+    .summary-row { display: flex; justify-content: space-between; gap: 12px; margin: 0 0 11px; color: #596966; font-size: .83rem; }
+    .summary-row.total { margin-top: 14px; padding-top: 13px; color: var(--ink); border-top: 1px solid var(--line); font-size: 1rem; font-weight: 600; }
+    .age-confirmation {
+      display: flex;
+      gap: 8px;
+      align-items: flex-start;
+      margin: 12px 0;
+      font-size: 0.70rem;
+      color: #596966;
+      line-height: 1.4;
+      cursor: pointer;
+    }
+    .age-confirmation input { margin-top: 2px; accent-color: var(--ink-deep); }
+    .checkout-button {
+      width: 100%;
+      margin-top: 9px;
+      padding: 14px 12px;
+      color: var(--gold);
+      background: var(--ink-deep);
+      border: 0;
+      border-radius: 999px;
+      font-size: .82rem;
+      font-weight: 600;
+    }
+    .checkout-button:hover { background: #1a4843; }
+    .checkout-button:disabled { opacity: 0.6; cursor: not-allowed; }
+
+    /* Visor de imagen y políticas */
+    .image-overlay, .policy-overlay {
+      position: fixed;
+      z-index: 80;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      background: rgba(3,15,14,.91);
+    }
+    .image-overlay[hidden], .policy-overlay[hidden] { display: none; }
+    .image-viewer { max-width: min(92vw, 850px); max-height: 88vh; text-align: center; }
+    .image-viewer img { display: block; max-width: 100%; max-height: 80vh; object-fit: contain; }
+    .viewer-close {
+      margin-bottom: 12px;
+      padding: 8px 17px;
+      color: #FFFFFF;
+      background: transparent;
+      border: 1px solid rgba(248,245,240,.55);
+      border-radius: 999px;
+      font-size: .72rem;
+    }
+    .policy-overlay { z-index: 90; background: rgba(3,15,14,.7); }
+    .policy-box {
+      width: min(560px, 100%);
+      max-height: 82vh;
+      overflow-y: auto;
+      padding: 28px;
+      color: var(--ink);
+      background: var(--paper-light);
+      box-shadow: var(--shadow);
+    }
+    .policy-box h2 { margin: 0 0 15px; font-family: 'Cormorant Garamond', Georgia, serif; font-size: 2rem; }
+    .policy-box p { color: #596966; font-size: .84rem; line-height: 1.7; }
+    .policy-box .policy-close { float: right; color: var(--ink); background: none; border: 0; font-size: 1.2rem; }
+
+    @media (max-width: 600px) and (orientation: portrait) {
+      .page-shell { padding: 0 14px; }
+      .site-header { padding: 80px 42px 22px; }
+      .brand { font-size: clamp(2.55rem, 11vw, 4rem); letter-spacing: .12em; }
+      .brand-rule { margin-top: 27px; }
+      .tagline { font-size: .68rem; line-height: 1.7; letter-spacing: .12em; }
+      .cart-float, .menu-float { top: 15px; width: 58px; height: 58px; }
+      .cart-float { right: 15px; }
+      .menu-float { left: 15px; }
+      .catalog-grid { gap: 13px; }
+      .product-info { padding: 12px 8px 13px; }
+      .product-description { font-size: .68rem; }
+      .product-tag { top: 6px; left: 6px; font-size: .64rem; }
+      .add-button { padding: 9px 5px; font-size: .66rem; }
+      .site-footer { margin-top: 65px; }
+    }
+    @media (max-width: 900px) and (orientation: landscape) {
+      .catalog-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      .site-header { padding-top: 45px; }
+      .cart-float, .menu-float { width: 58px; height: 58px; top: 14px; }
+      .cart-float { right: 18px; }
+      .menu-float { left: 18px; }
+    }
+    @media (min-width: 768px) {
+      .catalog-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 26px; }
+    }
+    @media (min-width: 1100px) {
+      .catalog-grid { grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 24px; }
+    }
+    @media (max-width: 767px) and (orientation: landscape) {
+      .catalog-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Botón menú hamburguesa en la parte superior izquierda -->
+  <button class="menu-float" id="open-sidebar" type="button" aria-label="Abrir menú de navegación">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/>
+    </svg>
+  </button>
+
+  <button class="cart-float" id="open-cart" type="button" aria-label="Abrir carrito">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M6 8h12l1 13H5L6 8Z"/>
+      <path stroke-linecap="round" stroke-linejoin="round" d="M9 8V6a3 3 0 0 1 6 0v2"/>
+    </svg>
+    <span class="cart-count" id="cart-count" hidden>0</span>
+  </button>
+
+  <div class="page-shell">
+    <header class="site-header">
+      <h1 class="brand"><span>Joyería</span><span>Itzayana</span></h1>
+      <div class="brand-rule"></div>
+      <p class="tagline">Piezas únicas, elegancia atemporal</p>
     </header>
 
-    <!-- Navegación por Categorías (Pestañas) -->
-    <nav class="w-full max-w-md my-6 overflow-x-auto">
-        <div class="flex justify-start md:justify-center space-x-2 border-b pb-2 px-2 text-sm">
-            <button onclick="filtrarCategoria('Todos')" class="tab-btn px-3 py-1 font-semibold border-b-2 border-black">Todos</button>
-            <button onclick="filtrarCategoria('Anillo')" class="tab-btn px-3 py-1 text-gray-500">Anillos</button>
-            <button onclick="filtrarCategoria('Argolla')" class="tab-btn px-3 py-1 text-gray-500">Argollas</button>
-            <button onclick="filtrarCategoria('Collar')" class="tab-btn px-3 py-1 text-gray-500">Collares</button>
-            <button onclick="filtrarCategoria('Dije')" class="tab-btn px-3 py-1 text-gray-500">Dijes</button>
-            <button onclick="filtrarCategoria('Pendiente')" class="tab-btn px-3 py-1 text-gray-500">Pendientes</button>
-            <button onclick="filtrarCategoria('Pulcera')" class="tab-btn px-3 py-1 text-gray-500">Pulceras</button>
-            <button onclick="filtrarCategoria('Rosario')" class="tab-btn px-3 py-1 text-gray-500">Rosarios</button>
-        </div>
-    </nav>
-
-    <!-- Catálogo de Productos (2 Columnas) -->
-    <main class="w-full max-w-md md:max-w-2xl">
-        <div id="catalogo" class="grid grid-cols-2 gap-4">
-            <p class="col-span-2 text-center text-gray-400 py-10">Cargando catálogo...</p>
-        </div>
+    <main>
+      <section id="catalogo" class="catalog-grid" aria-live="polite">
+        <p class="catalog-message">Cargando catálogo exclusivo...</p>
+      </section>
     </main>
+  </div>
 
-    <!-- Botón General de WhatsApp al final de la página -->
-    <footer class="w-full max-w-md text-center my-10">
-        <a id="btn-wa-general" href="#" target="_blank" class="inline-block w-full py-3 px-6 btn-whatsapp font-bold shadow-md hover:bg-green-600 transition">
-            Contactar por WhatsApp
-        </a>
-    </footer>
+  <!-- Sidebar de Navegación y Filtros -->
+  <div class="sidebar-overlay" id="sidebar-overlay" hidden>
+    <aside class="sidebar-panel" role="dialog" aria-modal="true" aria-labelledby="sidebar-title">
+      <div class="sidebar-heading">
+        <h2 id="sidebar-title">Menú</h2>
+        <button class="icon-close" id="close-sidebar" type="button" aria-label="Cerrar menú">×</button>
+      </div>
 
-    <!-- Modal para agrandar la imagen -->
-    <div id="modal-img" class="fixed inset-0 bg-black bg-opacity-80 hidden flex items-center justify-center p-4 z-50" onclick="cerrarModal()">
-        <img id="img-ampliada" src="" class="max-w-full max-h-full rounded shadow-lg">
+      <p class="sidebar-section-title">Filtrar por precio</p>
+      <div class="sort-controls-sidebar" role="group" aria-label="Ordenar productos por precio">
+        <label class="sort-option"><input type="radio" name="orden-precio" value="asc"> De menor a mayor</label>
+        <label class="sort-option"><input type="radio" name="orden-precio" value="desc"> De mayor a menor</label>
+      </div>
+
+      <p class="sidebar-section-title">Categorías</p>
+      <nav class="category-nav" aria-label="Categorías de productos">
+        <button class="tab-btn active" type="button" data-category="Inicio">Inicio</button>
+        <button class="tab-btn" type="button" data-category="Anillo">Anillos</button>
+        <button class="tab-btn" type="button" data-category="Collar">Collares</button>
+        <button class="tab-btn" type="button" data-category="Dije">Dijes</button>
+        <button class="tab-btn" type="button" data-category="Pendiente">Pendientes</button>
+        <button class="tab-btn" type="button" data-category="Pulsera">Pulseras</button>
+        <button class="tab-btn" type="button" data-category="Rosario">Rosarios</button>
+      </nav>
+    </aside>
+  </div>
+
+  <footer class="site-footer">
+    <p class="footer-brand">Joyería Itzayana</p>
+    <p class="tagline">Tienda fisica en El Progreso, Jutiapa, Guatemala.</p>
+    <div class="footer-links">
+      <button type="button" data-policy="terms">Términos y condiciones</button>
+      <button type="button" data-policy="privacy">Política de privacidad</button>
     </div>
+    <a id="btn-wa-general" class="whatsapp-button" href="#" target="_blank" rel="noopener">Contactar por WhatsApp</a>
+    <p class="copyright">© <span id="year"></span> Joyería Itzayana. Todos los derechos reservados.</p>
+  </footer>
 
-    <script>
-        // CONFIGURACIÓN: Reemplaza estos dos datos
-        const SHEET_ID = 'https://docs.google.com/spreadsheets/d/1bCrq5U4ei-hVUoadJQ4OTU0NEDj9RiaaidghomxT3_o/edit?gid=0#gid=0'; 
-        const NUMERO_WHATSAPP = '502XXXXXXXX'; // Número con código de país (ej. 50212345678)
+  <!-- Carrito lateral -->
+  <div class="overlay" id="cart-overlay" hidden>
+    <aside class="cart-panel" role="dialog" aria-modal="true" aria-labelledby="cart-title">
+      <div class="cart-heading">
+        <h2 id="cart-title">Mi carrito</h2>
+        <button class="icon-close" id="close-cart" type="button" aria-label="Cerrar carrito">×</button>
+      </div>
+      <div class="cart-items" id="cart-items">
+        <p class="empty-cart">El carrito está vacío.</p>
+      </div>
+      <div class="cart-summary">
+        <p class="summary-row"><span>Subtotal</span><strong id="cart-subtotal">Q 0.00</strong></p>
+        <p class="summary-row"><span>Costo de envío</span><strong id="shipping-cost">Q 0.00</strong></p>
+        <p class="summary-row total"><span>Total</span><strong id="cart-total">Q 0.00</strong></p>
+        <label class="age-confirmation"><input type="checkbox" id="age-confirmation">
+          <span>Confirmo ser mayor de 18 años y acepto los Términos y Condiciones. He leído la Política de Privacidad.</span>
+        </label>
+        <button class="checkout-button" id="checkout" type="button" disabled>Hacer pedido por WhatsApp</button>
+      </div>
+    </aside>
+  </div>
 
-        let productosGlobales = [];
+  <!-- Imagen original -->
+  <div class="image-overlay" id="image-overlay" hidden>
+    <div class="image-viewer">
+      <button class="viewer-close" id="close-image" type="button">CERRAR ×</button>
+      <img id="large-image" src="" alt="Imagen ampliada del producto">
+    </div>
+  </div>
 
-        // Asignar WhatsApp General
-        document.getElementById('btn-wa-general').href = `https://wa.me/${NUMERO_WHATSAPP}?text=${encodeURIComponent('Hola, Quisiera más información sobre su catálogo.')}`;
+  <!-- Avisos legales editables -->
+  <div class="policy-overlay" id="policy-overlay" hidden>
+    <section class="policy-box" role="dialog" aria-modal="true" aria-labelledby="policy-title">
+      <button class="policy-close" id="close-policy" type="button" aria-label="Cerrar">×</button>
+      <h2 id="policy-title"></h2>
+      <div id="policy-content"></div>
+    </section>
+  </div>
 
-        // Obtener datos mediante la API pública de Google Sheets (OpenSheet)
-        async function cargarCatalogo() {
-            try {
-                const res = await fetch(`https://opensheet.elk.sh/${SHEET_ID}/Hoja 1`);
-                const data = await res.json();
-                
-                // Filtrar solo los disponibles
-                productosGlobales = data.filter(item => item.DISPONIBILIDAD && item.DISPONIBILIDAD.trim().toLowerCase() === 'disponible');
-                renderizarProductos(productosGlobales);
-            } catch (error) {
-                console.error(error);
-                document.getElementById('catalogo').innerHTML = '<p class="col-span-2 text-center text-red-500">Error al cargar el catálogo.</p>';
-            }
+  <script>
+    'use strict';
+
+    // CONFIGURACIÓN
+    const SHEET_ID = '1bCrq5U4ei-hVUoadJQ4OTU0NEDj9RiaaidghomxT3_o';
+    const SHEET_NAME = 'Hoja 1';
+    const NUMERO_WHATSAPP = '50250856626';
+    const CATALOGO_IMAGE_SIZE = 200;
+    const CARRITO_IMAGE_SIZE = 80;
+
+    let productosGlobales = [];
+    let carrito = [];
+    let costoEnvio = 0;
+    let categoriaActual = 'Inicio';
+    let ordenPrecio = '';
+    const productosBySku = new Map();
+
+    const $ = (selector) => document.querySelector(selector);
+    const normalizar = (value) => String(value ?? '')
+      .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+      .toLowerCase().replace(/[^a-z0-9]/g, '');
+
+    function escaparHTML(value) {
+      return String(value ?? '').replace(/[&<>"']/g, char => ({
+        '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+      })[char]);
+    }
+
+    function numeroSeguro(value) {
+      if (typeof value === 'number') return Number.isFinite(value) ? value : 0;
+      const limpio = String(value ?? '').replace(/[Qq$,\s]/g, '').trim();
+      const n = Number(limpio);
+      return Number.isFinite(n) ? n : 0;
+    }
+
+    function moneda(value) {
+      return `Q ${numeroSeguro(value).toLocaleString('es-GT', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+    }
+
+    function obtenerCampo(row, aliases, fallbackIndex = -1) {
+      const keys = Object.keys(row || {});
+      const lookup = new Map(keys.map(key => [normalizar(key), row[key]]));
+      for (const alias of aliases) {
+        const key = normalizar(alias);
+        if (lookup.has(key)) return lookup.get(key);
+      }
+      if (fallbackIndex >= 0) return Object.values(row || {})[fallbackIndex] ?? '';
+      return '';
+    }
+
+    function extraerDriveId(url) {
+      const value = String(url ?? '').trim();
+      if (!value) return '';
+      const match = value.match(/(?:\/file\/d\/|\/d\/|[?&]id=)([a-zA-Z0-9_-]+)/);
+      return match ? match[1] : '';
+    }
+
+    function urlImagen(url, size = null) {
+      const original = String(url ?? '').trim();
+      if (!original) return 'https://placehold.co/512x512/f0eee8/71817e?text=Joyer%C3%ADa';
+      const id = extraerDriveId(original);
+      if (id) {
+        const dimension = size || 1600;
+        return `https://drive.google.com/thumbnail?id=${encodeURIComponent(id)}&sz=w${dimension}-h${dimension}`;
+      }
+      return original;
+    }
+
+    function mezclarArray(array) {
+      const copia = [...array];
+      for (let i = copia.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [copia[i], copia[j]] = [copia[j], copia[i]];
+      }
+      return copia;
+    }
+
+    function normalizarProducto(row, index) {
+      const categoria = String(obtenerCampo(row, ['PIEZA', 'CATEGORIA', 'CATEGORÍA', 'TIPO'], 0)).trim();
+      const skuRaw = obtenerCampo(row, ['SKU', 'ID', 'CODIGO', 'CÓDIGO'], 1);
+      const sku = String(skuRaw || `SKU-${index + 1}`).trim();
+      const etiqueta = String(obtenerCampo(row, ['ETIQUETA'], 2)).trim();
+      const imagen = String(obtenerCampo(row, ['IMAGEN', 'FOTO', 'URL IMAGEN', 'URL'], 3)).trim();
+      const material = String(obtenerCampo(row, ['MATERIAL'], 4)).trim();
+      const descripcion = String(obtenerCampo(row, ['DESCRIPCION', 'DESCRIPCIÓN'], 5)).trim();
+      const precioBase = numeroSeguro(obtenerCampo(row, ['PRECIO', 'PRECIO NORMAL', 'PRECIO Q'], 6));
+      const ofertaRaw = obtenerCampo(row, ['OFERTA'], 7);
+      const ofertaNumero = ofertaRaw === '' || ofertaRaw === null ? 0 : numeroSeguro(ofertaRaw);
+      const disponibilidad = String(obtenerCampo(row, ['DISPONIBILIDAD', 'ESTADO'], 8)).trim();
+      const precio = ofertaNumero > 0 ? ofertaNumero : precioBase;
+
+      return {
+        sku, categoria, etiqueta, imagen,
+        imagenCatalogo: urlImagen(imagen, CATALOGO_IMAGE_SIZE),
+        imagenCarrito: urlImagen(imagen, CARRITO_IMAGE_SIZE),
+        imagenOriginal: urlImagen(imagen),
+        material, descripcion, precioBase, oferta: ofertaNumero,
+        precio, disponibilidad
+      };
+    }
+
+    async function cargarCostoEnvio() {
+      const url = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&range=L2`;
+      try {
+        const response = await fetch(url);
+        if (!response.ok) throw new Error('No se pudo consultar L2');
+        const raw = await response.text();
+        const jsonText = raw.substring(raw.indexOf('{'), raw.lastIndexOf('}') + 1);
+        const parsed = JSON.parse(jsonText);
+        const cell = parsed?.table?.rows?.[0]?.c?.[0];
+        costoEnvio = numeroSeguro(cell?.v ?? cell?.f ?? 0);
+      } catch (error) {
+        console.warn('No fue posible leer directamente L2.', error);
+      }
+    }
+
+    function leerEnvioDesdeFilas(rows) {
+      if (!rows.length) return;
+      const keys = Object.keys(rows[0]);
+      const shippingKey = keys.find(key => {
+        const k = normalizar(key);
+        return ['costoenvio', 'costodeenvio', 'envio', 'shipping'].includes(k);
+      });
+      if (shippingKey) {
+        const value = rows[0][shippingKey];
+        if (value !== '' && value !== undefined) costoEnvio = numeroSeguro(value);
+      }
+    }
+
+    async function cargarCatalogo() {
+      const contenedor = $('#catalogo');
+      contenedor.innerHTML = '<p class="catalog-message">Cargando catálogo exclusivo...</p>';
+
+      try {
+        const endpoint = `https://opensheet.elk.sh/${SHEET_ID}/${encodeURIComponent(SHEET_NAME)}`;
+        const response = await fetch(endpoint, { cache: 'no-store' });
+        if (!response.ok) throw new Error(`Respuesta de Google Sheets: ${response.status}`);
+        const rows = await response.json();
+        if (!Array.isArray(rows)) throw new Error('La respuesta de la hoja no tiene el formato esperado.');
+
+        leerEnvioDesdeFilas(rows);
+        await cargarCostoEnvio();
+
+        productosGlobales = rows.map(normalizarProducto).filter(producto => {
+          const estado = normalizar(producto.disponibilidad);
+          return producto.sku && estado !== 'nodisponible' && estado !== 'no disponible';
+        });
+
+        productosBySku.clear();
+        productosGlobales.forEach(producto => productosBySku.set(producto.sku, producto));
+
+        actualizarResumenCarrito();
+        filtrarCategoria('Inicio');
+        abrirProductoDelEnlace();
+      } catch (error) {
+        console.error('Error al cargar el catálogo:', error);
+        contenedor.innerHTML = '<p class="catalog-message error">No fue posible cargar el catálogo. Verifica que la hoja esté publicada y que el nombre de la pestaña sea correcto.</p>';
+      }
+    }
+
+    function renderizarProductos(productos) {
+      const contenedor = $('#catalogo');
+      contenedor.innerHTML = '';
+
+      if (!productos.length) {
+        contenedor.innerHTML = '<p class="catalog-message">No hay piezas disponibles en esta categoría.</p>';
+        return;
+      }
+
+      productos.forEach(producto => {
+        const card = document.createElement('article');
+        card.className = 'product-card';
+        card.id = `producto-${encodeURIComponent(producto.sku)}`;
+        const etiquetaVisible = producto.etiqueta && !producto.etiqueta.includes('-');
+        const tag = etiquetaVisible
+          ? `<span class="product-tag">${escaparHTML(producto.etiqueta)}</span>` : '';
+        const precioHTML = producto.oferta > 0
+          ? `<span class="old-price">${moneda(producto.precioBase)}</span><span class="new-price">${moneda(producto.oferta)}</span>`
+          : moneda(producto.precioBase);
+
+        card.innerHTML = `
+          <div class="product-image-wrap" data-image="${escaparHTML(producto.sku)}" role="button" tabindex="0" aria-label="Ampliar imagen de ${escaparHTML(producto.sku)}">
+            <img class="product-image" src="${escaparHTML(producto.imagenCatalogo)}" alt="${escaparHTML(producto.sku)}" loading="lazy" decoding="async"
+              onerror="this.onerror=null;this.src='https://placehold.co/512x512/f0eee8/71817e?text=Sin+imagen'">
+            ${tag}
+            <button class="share-button" type="button" data-share="${escaparHTML(producto.sku)}" aria-label="Compartir producto ${escaparHTML(producto.sku)}" title="Compartir producto">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.7 10.7 6.6-4.4M8.7 13.3l6.6 4.4"/></svg>
+            </button>
+          </div>
+          <div class="product-info">
+            <p class="product-sku">SKU: ${escaparHTML(producto.sku)}</p>
+            <p class="product-material">Material: ${escaparHTML(producto.material || 'No especificado')}</p>
+            <p class="product-description">${escaparHTML(producto.descripcion)}</p>
+            <div class="product-bottom">
+              <p class="product-price">${precioHTML}</p>
+              <button class="add-button" type="button" data-add="${escaparHTML(producto.sku)}">Agregar al carrito</button>
+            </div>
+          </div>`;
+        contenedor.appendChild(card);
+      });
+    }
+
+    function filtrarCategoria(categoria) {
+      categoriaActual = categoria;
+      document.querySelectorAll('.tab-btn').forEach(button => {
+        const active = button.dataset.category === categoria;
+        button.classList.toggle('active', active);
+        button.setAttribute('aria-pressed', String(active));
+      });
+
+      let visibles = productosGlobales.filter(producto => {
+        const estado = normalizar(producto.disponibilidad);
+        const permitido = estado === 'disponible' || estado === 'impulso';
+        if (!permitido) return false;
+        if (categoria === 'Inicio') return estado === 'impulso';
+        return normalizar(producto.categoria).includes(normalizar(categoria));
+      });
+
+      // Ordenar según filtro o aleatorio predeterminado
+      if (ordenPrecio === '') {
+        visibles = mezclarArray(visibles);
+      } else if (ordenPrecio === 'asc') {
+        visibles.sort((a, b) => a.precio - b.precio);
+      } else if (ordenPrecio === 'desc') {
+        visibles.sort((a, b) => b.precio - a.precio);
+      }
+
+      renderizarProductos(visibles);
+      cerrarSidebar();
+    }
+
+    function abrirProductoDelEnlace() {
+      const hash = decodeURIComponent(window.location.hash.slice(1));
+      if (!hash.startsWith('producto-')) return;
+      const sku = hash.slice('producto-'.length);
+      const producto = productosBySku.get(sku);
+      if (!producto) return;
+      filtrarCategoria(producto.categoria);
+      document.getElementById(`producto-${encodeURIComponent(sku)}`)?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+
+    function agregarAlCarrito(sku) {
+      const producto = productosBySku.get(sku);
+      if (!producto) return;
+      const existente = carrito.find(item => item.sku === sku);
+      if (existente) existente.cantidad += 1;
+      else carrito.push({ ...producto, cantidad: 1 });
+      actualizarCarritoUI();
+    }
+
+    function cambiarCantidad(sku, cambio) {
+      const item = carrito.find(producto => producto.sku === sku);
+      if (!item) return;
+      item.cantidad += cambio;
+      if (item.cantidad <= 0) carrito = carrito.filter(producto => producto.sku !== sku);
+      actualizarCarritoUI();
+    }
+
+    function eliminarDelCarrito(sku) {
+      carrito = carrito.filter(producto => producto.sku !== sku);
+      actualizarCarritoUI();
+    }
+
+    function actualizarResumenCarrito() {
+      $('#shipping-cost').textContent = moneda(costoEnvio);
+      const subtotal = carrito.reduce((total, item) => total + item.precio * item.cantidad, 0);
+      $('#cart-subtotal').textContent = moneda(subtotal);
+      $('#cart-total').textContent = moneda(carrito.length ? subtotal + costoEnvio : 0);
+    }
+
+    function actualizarCarritoUI() {
+      const lista = $('#cart-items');
+      const cantidad = carrito.reduce((total, item) => total + item.cantidad, 0);
+      const badge = $('#cart-count');
+      badge.textContent = cantidad;
+      badge.hidden = cantidad === 0;
+      $('#checkout').disabled = !carrito.length || !$('#age-confirmation').checked;
+
+      if (!carrito.length) {
+        lista.innerHTML = '<p class="empty-cart">El carrito está vacío.</p>';
+        actualizarResumenCarrito();
+        return;
+      }
+
+      lista.innerHTML = carrito.map(item => {
+        const subtotal = item.precio * item.cantidad;
+        return `
+          <div class="cart-item">
+            <img class="cart-thumb" src="${escaparHTML(item.imagenCarrito)}" alt="${escaparHTML(item.sku)}"
+              data-image="${escaparHTML(item.sku)}" loading="lazy"
+              onerror="this.onerror=null;this.src='https://placehold.co/100x100/f0eee8/71817e?text=Joya'">
+            <div>
+              <p class="cart-item-name">${escaparHTML(item.sku)}</p>
+              <p class="cart-item-sku">${escaparHTML(item.material || '')}</p>
+              <p class="cart-item-price">${moneda(item.precio)} c/u</p>
+              <div class="quantity-control">
+                <button type="button" data-quantity="-1" data-sku="${escaparHTML(item.sku)}" aria-label="Restar">−</button>
+                <span>${item.cantidad}</span>
+                <button type="button" data-quantity="1" data-sku="${escaparHTML(item.sku)}" aria-label="Sumar">+</button>
+              </div>
+            </div>
+            <div class="cart-item-end">
+              <button class="remove-item" type="button" data-remove="${escaparHTML(item.sku)}" aria-label="Eliminar producto">×</button>
+              <span class="cart-subtotal">${moneda(subtotal)}</span>
+            </div>
+          </div>`;
+      }).join('');
+      actualizarResumenCarrito();
+    }
+
+    function enviarPedidoCarrito() {
+      if (!carrito.length) {
+        alert('El carrito está vacío.');
+        return;
+      }
+      if (!$('#age-confirmation').checked) {
+        alert('Debes confirmar la declaración de mayoría de edad para continuar.');
+        return;
+      }
+      if (!/^\d{8,15}$/.test(NUMERO_WHATSAPP)) {
+        alert('Configura NUMERO_WHATSAPP con tu número real antes de recibir pedidos.');
+        return;
+      }
+
+      const subtotal = carrito.reduce((total, item) => total + item.precio * item.cantidad, 0);
+      const total = subtotal + costoEnvio;
+      let mensaje = 'Hola, quisiera realizar el siguiente pedido:\n\n';
+      carrito.forEach(item => {
+        mensaje += `• SKU: ${item.sku}\n  Cantidad: ${item.cantidad}\n  Precio unitario: ${moneda(item.precio)}\n  Subtotal: ${moneda(item.precio * item.cantidad)}\n\n`;
+      });
+      mensaje += `\nSubtotal: ${moneda(subtotal)}\nCosto de envío: ${moneda(costoEnvio)}\n*Total: ${moneda(total)}*`;
+      window.open(`https://wa.me/${NUMERO_WHATSAPP}?text=${encodeURIComponent(mensaje)}`, '_blank', 'noopener');
+    }
+
+    async function compartirProducto(sku) {
+      const producto = productosBySku.get(sku);
+      if (!producto) return;
+      const titulo = `Joyería Itzayana | ${producto.sku}`;
+      const texto = `${producto.sku} — ${producto.material || 'Joyería'} — ${moneda(producto.precio)}. Consulta este producto en Joyería Itzayana.`;
+      const enlaceProducto = new URL(window.location.href);
+      enlaceProducto.hash = `producto-${encodeURIComponent(producto.sku)}`;
+      const datos = { title: titulo, text: texto, url: enlaceProducto.href };
+      try {
+        if (navigator.share) {
+          await navigator.share(datos);
+        } else if (navigator.clipboard?.writeText) {
+          await navigator.clipboard.writeText(`${texto} ${enlaceProducto.href}`);
+          alert('Información del producto copiada para compartir.');
+        } else {
+          window.prompt('Copia este texto para compartir el producto:', `${texto} ${enlaceProducto.href}`);
         }
+      } catch (error) {
+        if (error?.name !== 'AbortError') console.error('No fue posible compartir el producto:', error);
+      }
+    }
 
-        function renderizarProductos(productos) {
-            const contenedor = document.getElementById('catalogo');
-            contenedor.innerHTML = '';
+    function abrirSidebar() {
+      $('#sidebar-overlay').hidden = false;
+      document.body.style.overflow = 'hidden';
+    }
+    function cerrarSidebar() {
+      $('#sidebar-overlay').hidden = true;
+      document.body.style.overflow = '';
+    }
 
-            if (productos.length === 0) {
-                contenedor.innerHTML = '<p class="col-span-2 text-center text-gray-500">No hay piezas disponibles en esta categoría.</p>';
-                return;
-            }
+    function abrirCarrito() {
+      $('#cart-overlay').hidden = false;
+      document.body.style.overflow = 'hidden';
+    }
+    function cerrarCarrito() {
+      $('#cart-overlay').hidden = true;
+      document.body.style.overflow = '';
+    }
 
-            productos.forEach(prod => {
-                const linkWA = `https://wa.me/${NUMERO_WHATSAPP}?text=${encodeURIComponent(`Quiero hacer un pedido del producto ID: ${prod.ID}`)}`;
-                
-                const card = document.createElement('div');
-                card.className = "flex flex-col justify-between p-3 border-teal-custom bg-white text-center rounded-sm shadow-sm";
+    function agrandarImagen(sku) {
+      const producto = productosBySku.get(sku) || carrito.find(item => item.sku === sku);
+      if (!producto) return;
+      const imagenGrande = $('#large-image');
+      imagenGrande.onerror = () => {
+        imagenGrande.onerror = null;
+        imagenGrande.src = producto.imagenCatalogo;
+      };
+      imagenGrande.src = producto.imagenOriginal;
+      imagenGrande.alt = `Imagen original del producto ${producto.sku}`;
+      $('#image-overlay').hidden = false;
+      document.body.style.overflow = 'hidden';
+    }
+    function cerrarImagen() {
+      $('#image-overlay').hidden = true;
+      $('#large-image').src = '';
+      document.body.style.overflow = '';
+    }
 
-                card.innerHTML = `
-                    <div>
-                        <div class="w-full h-44 overflow-hidden mb-2 cursor-pointer bg-gray-50 flex items-center justify-center" onclick="agrandarImagen('${prod.IMAGEN}')">
-                            <img src="${prod.IMAGEN}" alt="${prod.PIEZA}" class="object-cover w-full h-full hover:scale-105 transition duration-300" onerror="this.src='https://via.placeholder.com/150?text=Sin+Imagen'">
-                        </div>
-                        <p class="text-xs text-gray-700 font-light mb-2 line-clamp-3">${prod.DESCRIPCION || ''}</p>
-                    </div>
-                    <div>
-                        <p class="text-[10px] text-gray-500 italic mb-1">Incluye costo de envío y empaquetado</p>
-                        <p class="text-base font-bold mb-3">Q ${prod.PRECIO}</p>
-                        <a href="${linkWA}" target="_blank" class="inline-block w-full py-2 px-2 text-xs font-semibold btn-whatsapp shadow hover:opacity-90 transition">
-                            Haga su pedido
-                        </a>
-                    </div>
-                `;
-                contenedor.appendChild(card);
-            });
-        }
+    const textosLegales = {
+      terms: {
+        title: 'Términos y condiciones',
+        body: `<p><strong>Última actualización:</strong> Noviembre de 2026</p>
 
-        function filtrarCategoria(cat) {
-            // Actualizar pestañas activas
-            const btns = document.querySelectorAll('.tab-btn');
-            btns.forEach(b => {
-                b.classList.remove('font-semibold', 'border-b-2', 'border-black');
-                b.classList.add('text-gray-500');
-                if (b.innerText.toLowerCase().includes(cat.toLowerCase()) || (cat === 'Todos' && b.innerText === 'Todos')) {
-                    b.classList.add('font-semibold', 'border-b-2', 'border-black');
-                    b.classList.remove('text-gray-500');
-                }
-            });
+  <p>
+    Bienvenido al catálogo en línea de <strong>ITZAYANA</strong>.
+    El presente documento establece las condiciones aplicables a la navegación
+    en nuestro catálogo digital y a las operaciones comerciales realizadas
+    mediante nuestros canales oficiales de atención.
+  </p>
 
-            if (cat === 'Todos') {
-                renderizarProductos(productosGlobales);
-            } else {
-                const filtrados = productosGlobales.filter(p => p.PIEZA && p.PIEZA.toLowerCase().includes(cat.toLowerCase()));
-                renderizarProductos(filtrados);
-            }
-        }
+  <p>
+    Al utilizar este catálogo o iniciar un proceso de compra, el usuario
+    reconoce que ha tenido acceso a estos términos y condiciones. Las
+    operaciones de compraventa estarán sujetas a las condiciones particulares
+    confirmadas entre el cliente y un vendedor autorizado, así como a la
+    legislación vigente de la República de Guatemala.
+  </p>
 
-        function agrandarImagen(url) {
-            document.getElementById('img-ampliada').src = url;
-            document.getElementById('modal-img').classList.remove('hidden');
-        }
+  <h3>1. Naturaleza del catálogo y disponibilidad de productos</h3>
 
-        function cerrarModal() {
-            document.getElementById('modal-img').classList.add('hidden');
-        }
+  <p>
+    Este sitio web funciona exclusivamente como un catálogo digital para
+    exhibir los productos comercializados por <strong>ITZAYANA</strong>.
+    No constituye una plataforma de pago ni un sistema de procesamiento
+    automático de pedidos.
+  </p>
 
-        // Cargar al iniciar
-        cargarCatalogo();
-    </script>
+  <p>
+    Los precios publicados están expresados en quetzales guatemaltecos (Q)
+    y tienen carácter informativo. Pueden estar sujetos a modificaciones
+    debido a actualizaciones comerciales, cambios de proveedores o
+    disponibilidad de inventario.
+  </p>
+
+  <p>
+    La disponibilidad de los productos puede variar debido a ventas
+    simultáneas, actualizaciones de inventario u otras circunstancias
+    comerciales. Por esta razón, la existencia de un producto deberá
+    verificarse con un vendedor antes de confirmar una compra.
+  </p>
+
+  <p>
+    Las fotografías se presentan con fines ilustrativos. Pueden existir
+    pequeñas diferencias de tonalidad, brillo o apariencia debido a la
+    iluminación utilizada durante la fotografía, las características de
+    las pantallas o las condiciones de visualización de cada dispositivo.
+    Estas variaciones no implican necesariamente que el producto entregado
+    sea diferente al anunciado.
+  </p>
+
+  <p>
+    Las características esenciales de cada artículo, incluyendo material,
+    diseño y demás especificaciones publicadas, deberán corresponder con
+    el producto ofrecido.
+  </p>
+
+  <h3>2. Características y materiales de los productos</h3>
+
+  <p>
+    La joyería comercializa exclusivamente artículos nuevos elaborados
+    y comercializados como plata de ley 925, de acuerdo con las
+    características indicadas en las respectivas descripciones de los
+    productos.
+  </p>
+
+  <p>
+    El cliente debe consultar la descripción individual de cada artículo
+    para conocer sus características, dimensiones, diseño y demás
+    especificaciones relevantes antes de confirmar su compra.
+  </p>
+
+  <p>
+    La plata es un material susceptible a cambios naturales de apariencia,
+    oxidación y pérdida de brillo como consecuencia de factores ambientales,
+    almacenamiento, contacto con determinadas sustancias o condiciones
+    de uso.
+  </p>
+
+  <p>
+    La limpieza, conservación y mantenimiento adecuados de las joyas son
+    responsabilidad del usuario, sin perjuicio de las garantías y derechos
+    legales aplicables cuando exista un defecto de fabricación.
+  </p>
+
+  <h3>3. Proceso de compra y confirmación de pedidos</h3>
+
+  <p>
+    El proceso de compra se realiza mediante comunicación directa con
+    un vendedor a través del canal oficial de WhatsApp de
+    <strong>[NOMBRE DE LA JOYERÍA]</strong>.
+  </p>
+
+  <p>
+    El envío de un mensaje desde el catálogo constituye únicamente una
+    intención de compra y una solicitud de información. Dicho mensaje
+    no representa por sí mismo una obligación de pago ni constituye
+    una confirmación definitiva del pedido.
+  </p>
+
+  <p>
+    Antes de aceptar una compra, el vendedor deberá verificar:
+  </p>
+
+  <ul>
+    <li>La existencia y disponibilidad de los productos solicitados.</li>
+    <li>El precio vigente de cada artículo.</li>
+    <li>El costo actualizado del servicio de mensajería.</li>
+    <li>La cobertura y posibilidad de entrega en la dirección proporcionada.</li>
+    <li>El importe total que deberá pagar el cliente.</li>
+  </ul>
+
+  <p>
+    Una vez realizadas estas verificaciones, el vendedor comunicará
+    al cliente el precio definitivo de los productos y el costo del
+    envío, junto con las condiciones correspondientes.
+  </p>
+
+  <p>
+    <strong>El pedido se considerará aceptado cuando el vendedor haya
+    confirmado la disponibilidad y el importe total, y el cliente
+    haya manifestado expresamente su conformidad con dichas condiciones.</strong>
+  </p>
+
+  <p>
+    La confirmación del precio por parte del vendedor y la aceptación
+    del cliente establecerán las condiciones comerciales acordadas
+    para esa operación. Cualquier modificación posterior deberá
+    comunicarse y contar con la aceptación del cliente.
+  </p>
+
+  <p>
+    El cliente no estará obligado a continuar con la compra si no está
+    de acuerdo con el precio, el costo del envío, la disponibilidad
+    o cualquier otra condición comunicada antes de la aceptación.
+  </p>
+
+  <h3>4. Métodos de pago</h3>
+
+  <p>
+    Una vez confirmado y aceptado el importe total del pedido, el
+    cliente podrá seleccionar entre los métodos de pago habilitados
+    por la joyería:
+  </p>
+
+  <ul>
+    <li>
+      <strong>Depósito bancario:</strong> El pedido será procesado
+      una vez que se haya verificado el depósito y la acreditación
+      efectiva de los fondos.
+    </li>
+    <li>
+      <strong>Transferencia bancaria:</strong> El despacho se
+      realizará después de comprobar que el pago haya sido recibido
+      y acreditado en la cuenta correspondiente.
+    </li>
+    <li>
+      <strong>Pago contra entrega:</strong> El cliente podrá cancelar
+      el importe acordado al momento de recibir el paquete, conforme
+      a las condiciones del servicio de mensajería.
+    </li>
+  </ul>
+
+  <p>
+    En la modalidad de pago contra entrega, el cliente se compromete
+    a disponer del importe previamente confirmado y a realizar el
+    pago al recibir el paquete.
+  </p>
+
+  <p>
+    La joyería no considerará válidos los comprobantes de pago que
+    no correspondan con operaciones efectivamente acreditadas.
+    El envío de una imagen o captura de pantalla de una transferencia
+    no sustituye la verificación de los fondos recibidos.
+  </p>
+
+  <h3>5. Envíos y entregas</h3>
+
+  <p>
+    La joyería realiza envíos exclusivamente dentro del territorio
+    de la República de Guatemala. No se ofrecen envíos internacionales.
+  </p>
+
+  <p>
+    Los despachos se realizan mediante una empresa externa de mensajería,
+    actualmente identificada comercialmente como <strong>GuaTex</strong>.
+  </p>
+
+  <p>
+    El costo del envío será informado y confirmado al cliente antes
+    de aceptar el pedido. Debido a que las tarifas de mensajería
+    pueden variar, prevalecerá el costo que el vendedor haya
+    comunicado y que el cliente haya aceptado para esa operación.
+  </p>
+
+  <p>
+    Una vez entregado el paquete a la empresa de mensajería, esta
+    emitirá un número de guía o código de rastreo que permitirá
+    consultar el estado del envío.
+  </p>
+
+  <p>
+    La joyería proporcionará al cliente dicho número de guía el
+    mismo día en que se realice el despacho, siempre que haya
+    sido emitido por la empresa de mensajería.
+  </p>
+
+  <p>
+    <strong>5.1. Responsabilidad durante el transporte</strong>
+  </p>
+
+  <p>
+    GuaTex es un proveedor externo e independiente, encargado de
+    la recepción, transporte y entrega de los paquetes conforme
+    a sus propias condiciones de servicio.
+  </p>
+
+  <p>
+    Una vez que el paquete haya sido entregado a la empresa de
+    mensajería y se haya emitido su correspondiente guía, las
+    incidencias relacionadas con el transporte, pérdida, extravío
+    o entrega del paquete deberán gestionarse con dicha empresa.
+  </p>
+
+  <p>
+    El cliente podrá utilizar el número de guía para consultar
+    directamente el estado de su envío y comunicarse con GuaTex
+    cuando necesite información o asistencia.
+  </p>
+
+  <p>
+    La joyería podrá proporcionar la información disponible y
+    colaborar razonablemente en la gestión de incidencias.
+    Esta distribución de funciones no implica la renuncia del
+    cliente a los derechos que legalmente le correspondan frente
+    al proveedor.
+  </p>
+
+  <p>
+    <strong>5.2. Dirección de entrega y datos proporcionados</strong>
+  </p>
+
+  <p>
+    El cliente es responsable de proporcionar correctamente su
+    nombre, número telefónico, dirección y demás datos necesarios
+    para realizar la entrega.
+  </p>
+
+  <p>
+    Si se detectan dificultades para localizar al destinatario,
+    la empresa de mensajería podrá utilizar los datos de contacto
+    proporcionados para intentar coordinar la entrega.
+  </p>
+
+  <p>
+    Se recomienda al cliente mantener disponible su teléfono y
+    atender las comunicaciones relacionadas con el envío.
+  </p>
+
+  <p>
+    <strong>5.3. Envíos contra entrega rechazados</strong>
+  </p>
+
+  <p>
+    Cuando un pedido enviado mediante pago contra entrega no pueda
+    completarse porque el cliente no acepte el paquete, proporcione
+    datos incorrectos o no sea posible concretar la entrega,
+    el costo del envío fallido será asumido por la joyería,
+    conforme a las condiciones comerciales de este servicio.
+  </p>
+
+  <p>
+    La joyería se reserva el derecho de verificar futuros pedidos
+    y evaluar la disponibilidad de la modalidad de pago contra
+    entrega cuando existan antecedentes de incidencias reiteradas.
+    Esta medida no afectará los derechos legales del consumidor.
+  </p>
+
+  <p>
+    <strong>5.4. Rechazo del paquete por falta de condiciones
+    de inspección</strong>
+  </p>
+
+  <p>
+    Cuando el servicio de mensajería no permita al cliente
+    inspeccionar el contenido del paquete antes de aceptarlo,
+    el cliente podrá rechazar la recepción y solicitar que
+    el paquete sea devuelto a la joyería a través de la
+    empresa de mensajería.
+  </p>
+
+  <p>
+    El cliente deberá comunicar esta situación a la joyería
+    para facilitar el seguimiento del paquete y la gestión
+    correspondiente.
+  </p>
+
+  <h3>6. Cambios, devoluciones y garantías</h3>
+
+  <p>
+    La joyería reconoce los derechos de los consumidores
+    establecidos en la Ley de Protección al Consumidor y Usuario,
+    Decreto 6-2003 del Congreso de la República de Guatemala,
+    así como las demás disposiciones legales aplicables.
+  </p>
+
+  <p>
+    <strong>6.1. Productos incorrectos o defectuosos</strong>
+  </p>
+
+  <p>
+    Si el cliente recibe un artículo diferente al solicitado,
+    incompleto o que presenta un posible defecto de fabricación,
+    podrá comunicarlo mediante el mismo canal oficial de
+    WhatsApp utilizado para realizar la compra.
+  </p>
+
+  <p>
+    Para facilitar la evaluación de la incidencia, se recomienda
+    realizar el reporte dentro de las primeras 48 horas naturales
+    posteriores a la recepción del paquete.
+  </p>
+
+  <p>
+    El cliente deberá proporcionar, cuando sea posible:
+  </p>
+
+  <ul>
+    <li>Nombre utilizado para realizar el pedido.</li>
+    <li>Fecha de recepción del paquete.</li>
+    <li>Descripción del problema detectado.</li>
+    <li>Fotografías o videos que permitan observar el producto y el defecto.</li>
+    <li>Número de guía, cuando resulte necesario para identificar el envío.</li>
+  </ul>
+
+  <p>
+    El plazo de 48 horas constituye una recomendación para facilitar
+    la detección y documentación temprana de incidencias. No supone
+    la pérdida automática de los derechos de garantía ni limita
+    los plazos de reclamación reconocidos por la legislación vigente.
+  </p>
+
+  <p>
+    <strong>6.2. Evaluación de reclamaciones</strong>
+  </p>
+
+  <p>
+    La joyería podrá solicitar información adicional o la devolución
+    del artículo para realizar una inspección física cuando resulte
+    necesario para determinar el origen del problema.
+  </p>
+
+  <p>
+    Se evaluará si la incidencia corresponde a:
+  </p>
+
+  <ul>
+    <li>Defecto de fabricación.</li>
+    <li>Error en la preparación o despacho del pedido.</li>
+    <li>Daño ocasionado durante el transporte.</li>
+    <li>Daño atribuible al uso, manipulación, almacenamiento o mantenimiento inadecuado.</li>
+  </ul>
+
+  <p>
+    La evaluación deberá considerar las características del producto,
+    la naturaleza del daño y las evidencias disponibles.
+  </p>
+
+  <p>
+    Cuando se determine que existe responsabilidad del proveedor
+    por un defecto o incumplimiento cubierto por la legislación,
+    se aplicarán las soluciones que correspondan legalmente,
+    incluyendo reparación gratuita, reposición o devolución
+    del importe pagado, según proceda.
+  </p>
+
+  <p>
+    <strong>6.3. Daños atribuibles al uso o mantenimiento</strong>
+  </p>
+
+  <p>
+    No se considerarán defectos de fabricación aquellos daños
+    que se demuestre que fueron ocasionados por golpes, caídas,
+    deformaciones, manipulación inadecuada, almacenamiento
+    incorrecto, reparaciones no autorizadas o exposición a
+    sustancias que puedan deteriorar el material.
+  </p>
+
+  <p>
+    Entre los factores que pueden afectar la apariencia o
+    conservación de la plata se encuentran los perfumes,
+    productos químicos, cosméticos, humedad y otros agentes
+    externos.
+  </p>
+
+  <p>
+    Estas circunstancias deberán evaluarse individualmente
+    y no implicarán una exclusión automática de la garantía
+    cuando exista evidencia de un defecto de fabricación.
+  </p>
+
+  <p>
+    <strong>6.4. Derecho de retracto y garantías legales</strong>
+  </p>
+
+  <p>
+    El cliente conservará el derecho de retracto y las garantías
+    reconocidas por la legislación guatemalteca, incluyendo
+    las disposiciones de los artículos 51 y 74 del Decreto 6-2003,
+    cuando resulten aplicables.
+  </p>
+
+  <p>
+    En particular, el derecho de retracto deberá ejercerse dentro
+    del plazo y bajo las condiciones establecidos legalmente.
+    Asimismo, los reclamos por defectos o incumplimientos estarán
+    sujetos a los plazos y requisitos legales correspondientes.
+  </p>
+
+  <p>
+    <strong>6.5. Cambios por preferencia personal</strong>
+  </p>
+
+  <p>
+    Los cambios solicitados exclusivamente por motivos de gusto
+    personal, elección de diseño o selección incorrecta de talla
+    no se consideran automáticamente defectos de fabricación.
+    Su aceptación estará sujeta a la política comercial de la
+    joyería, sin perjuicio de los derechos legales que pudieran
+    corresponder al consumidor.
+  </p>
+
+  <h3>7. Responsabilidad y limitaciones</h3>
+
+  <p>
+    La joyería procurará mantener actualizado el catálogo digital
+    y proporcionar información clara sobre los productos, precios
+    y disponibilidad.
+  </p>
+
+  <p>
+    No obstante, pueden producirse interrupciones temporales
+    del servicio por mantenimiento, fallos técnicos, problemas
+    de conectividad o incidencias en plataformas externas
+    utilizadas para alojar o visualizar el catálogo, incluyendo
+    servicios como GitHub o Google Drive.
+  </p>
+
+  <p>
+    La joyería no será responsable de interrupciones técnicas
+    que estén fuera de su control razonable, siempre que ello
+    no implique incumplir obligaciones comerciales ya aceptadas
+    ni vulnerar derechos legalmente reconocidos al consumidor.
+  </p>
+
+  <p>
+    La joyería tampoco será responsable por daños que se
+    demuestre que fueron ocasionados exclusivamente por el
+    uso inadecuado del producto, actuaciones de terceros
+    ajenos a su control o circunstancias legalmente eximentes.
+  </p>
+
+  <p>
+    Ninguna disposición de estos términos y condiciones tendrá
+    por objeto excluir, reducir o limitar responsabilidades
+    que legalmente correspondan a la joyería, ni privar al
+    consumidor de los derechos y mecanismos de reclamación
+    establecidos por la legislación guatemalteca.
+  </p>
+
+  <h3>8. Uso del catálogo y propiedad intelectual</h3>
+
+  <p>
+    Las fotografías, imágenes, descripciones, textos y demás
+    elementos gráficos publicados en el catálogo pertenecen
+    a sus respectivos titulares o se utilizan con autorización
+    cuando corresponde.
+  </p>
+
+  <p>
+    Queda prohibida su reproducción, distribución, modificación
+    o utilización con fines comerciales sin la autorización
+    correspondiente, salvo en los casos permitidos por la ley.
+  </p>
+
+  <p>
+    El usuario se compromete a utilizar el catálogo de manera
+    lícita y a no realizar actividades que puedan afectar su
+    funcionamiento, seguridad o disponibilidad.
+  </p>
+
+  <h3>9. Atención al cliente y reclamaciones</h3>
+
+  <p>
+    Las consultas relacionadas con productos, disponibilidad,
+    precios, pedidos, envíos y reclamaciones deberán realizarse
+    mediante los canales oficiales de atención de la joyería.
+  </p>
+
+  <p>
+    Para las incidencias relacionadas con desperfectos,
+    productos incorrectos o posibles defectos de fabricación,
+    el cliente deberá utilizar preferentemente el mismo chat
+    oficial de WhatsApp mediante el cual se gestionó su compra.
+  </p>
+
+  <p>
+    La joyería procurará atender las consultas y reclamaciones
+    de manera razonable y proporcionar una respuesta conforme
+    a las circunstancias de cada caso.
+  </p>
+
+  <h3>10. Legislación aplicable y resolución de controversias</h3>
+
+  <p>
+    Estos términos y condiciones se rigen e interpretan de
+    conformidad con las leyes vigentes de la República de Guatemala.
+  </p>
+
+  <p>
+    Cualquier controversia relacionada con la interpretación,
+    aplicación o cumplimiento de estas condiciones procurará
+    resolverse inicialmente mediante comunicación directa
+    entre el cliente y la joyería.
+  </p>
+
+  <p>
+    Cuando no sea posible alcanzar una solución satisfactoria,
+    las partes podrán acudir a los mecanismos administrativos
+    de protección al consumidor, incluyendo la Dirección de
+    Atención y Asistencia al Consumidor (DIACO), o a las
+    autoridades judiciales competentes, según corresponda.
+  </p>
+
+  <h3>11. Modificaciones de los términos y condiciones</h3>
+
+  <p>
+    La joyería podrá actualizar estos términos y condiciones
+    cuando existan cambios en sus operaciones comerciales,
+    servicios, procedimientos o disposiciones legales aplicables.
+  </p>
+
+  <p>
+    Las modificaciones serán publicadas en este mismo catálogo
+    indicando la fecha de actualización correspondiente.
+  </p>
+
+  <p>
+    Las modificaciones no alterarán unilateralmente las
+    condiciones particulares de una compra que ya haya sido
+    aceptada por el cliente, salvo que exista una causa
+    legalmente justificada.
+  </p>
+
+  <hr>
+
+  <p>
+    <strong>Información del proveedor</strong>
+  </p>
+
+  <p>
+    Nombre comercial: [NOMBRE DE LA JOYERÍA]<br>
+    Propietario o razón social: [NOMBRE LEGAL]<br>
+    NIT: [NIT DEL PROVEEDOR]<br>
+    Domicilio comercial: [DIRECCIÓN]<br>
+    WhatsApp oficial: [NÚMERO DE CONTACTO]<br>
+    Correo electrónico: [CORREO ELECTRÓNICO]
+  </p>
+
+  <p>
+    <strong>Autoridad de protección al consumidor:</strong>
+    Dirección de Atención y Asistencia al Consumidor (DIACO),
+    Guatemala.
+  </p>`
+      },
+      privacy: {
+        title: 'Política de privacidad',
+        body: `<p>
+    En <strong>Joyería Itzayana</strong> respetamos la privacidad
+    de nuestros clientes y visitantes. Nos comprometemos a
+    tratar responsablemente la información que nos proporcionan
+    durante las consultas y operaciones comerciales.
+  </p>
+
+  <p>
+    Esta Política de Privacidad describe qué información podemos
+    recibir, para qué la utilizamos, con quién podemos compartirla
+    y cuáles son las condiciones para su conservación y eliminación.
+  </p>
+
+
+  <h3>Naturaleza del sitio web y funcionamiento del catálogo</h3>
+
+  <p>
+    Este sitio web funciona como un catálogo digital informativo
+    para exhibir productos de joyería de plata y oro,
+    sus fotografías, referencias, características,
+    precios y disponibilidad.
+  </p>
+
+  <p>
+    El sitio no dispone de cuentas de usuario, registro de clientes,
+    formularios de contacto ni sistemas de pago integrados.
+    Tampoco solicita directamente nombres, direcciones,
+    números telefónicos ni información bancaria.
+  </p>
+
+  <p>
+    El carrito de compras tiene una función exclusivamente
+    informativa: permite seleccionar productos y recopilar
+    sus códigos de identificación (SKU) para incorporarlos
+    a un mensaje que el visitante puede enviar voluntariamente
+    mediante WhatsApp.
+  </p>
+
+  <p>
+    La selección de productos no constituye por sí misma
+    una compra, reserva ni confirmación de disponibilidad.
+    El pedido debe ser comunicado y coordinado directamente
+    con Joyería Itzayana mediante WhatsApp o los canales
+    de atención disponibles.
+  </p>
+
+  <h3>Información técnica y almacenamiento local</h3>
+
+  <p>
+    Este catálogo utiliza almacenamiento local del navegador
+    (localStorage) para conservar información técnica
+    relacionada con la carga y visualización de los productos
+    y el funcionamiento del catálogo.
+  </p>
+
+  <p>
+    Esta funcionalidad no tiene como finalidad identificar
+    personalmente al visitante ni crear perfiles de consumo.
+    La información local puede eliminarse mediante las opciones
+    de configuración y limpieza de datos del navegador utilizado.
+  </p>
+
+  <p>
+    Actualmente, Joyería Itzayana no utiliza Google Analytics,
+    Facebook Pixel, sistemas de seguimiento publicitario
+    ni herramientas propias de elaboración de perfiles
+    o seguimiento estadístico de visitantes.
+  </p>
+
+  <p>
+    La infraestructura tecnológica utilizada puede procesar
+    información técnica de conexión, como direcciones IP,
+    identificadores técnicos, tipo de navegador y solicitudes
+    de acceso, de acuerdo con sus propias políticas y
+    condiciones de servicio.
+  </p>
+
+  <h3>Servicios tecnológicos de terceros</h3>
+
+  <p>
+    Para ofrecer y mantener el catálogo en funcionamiento
+    se utilizan servicios externos que operan bajo sus
+    propias condiciones de uso y políticas de privacidad.
+  </p>
+
+  <ul>
+    <li>
+      <strong>GitHub Pages (GitHub, Inc.):</strong>
+      utilizado para alojar y publicar los archivos
+      del sitio web.
+    </li>
+    <li>
+      <strong>Google Drive / Google Sheets (Google LLC):</strong>
+      utilizados como infraestructura de almacenamiento
+      y consulta de información del catálogo, incluyendo
+      referencias, descripciones, precios y disponibilidad.
+    </li>
+    <li>
+      <strong>WhatsApp Business (Meta Platforms, Inc.):</strong>
+      utilizado como canal externo de comunicación
+      para consultas, pedidos y atención al cliente.
+    </li>
+  </ul>
+
+  <p>
+    Estos proveedores pueden procesar información técnica
+    o datos necesarios para prestar sus respectivos servicios.
+    Joyería Itzayana no administra sus sistemas internos
+    ni controla sus políticas de conservación, seguridad,
+    procesamiento o eliminación de información.
+  </p>
+
+  <p>
+    El uso de estos servicios está sujeto a las condiciones
+    y políticas de privacidad establecidas por sus respectivos
+    proveedores.
+  </p>
+
+  <h3>Información proporcionada voluntariamente por WhatsApp</h3>
+
+  <p>
+    Cuando un visitante decide contactar a Joyería Itzayana
+    por WhatsApp, inicialmente puede realizar consultas
+    sobre productos, precios, características y disponibilidad
+    sin necesidad de proporcionar información personal.
+  </p>
+
+  <p>
+    Únicamente cuando el cliente manifiesta expresamente
+    su intención de realizar un pedido, podrán solicitarse
+    los siguientes datos, según corresponda:
+  </p>
+
+  <ul>
+    <li><strong>Nombre:</strong> para identificar al comprador o destinatario.</li>
+    <li><strong>Número telefónico:</strong> para coordinar la entrega y mantener comunicación relacionada con el pedido.</li>
+    <li><strong>Dirección de entrega:</strong> necesaria para gestionar el envío mediante la empresa de mensajería.</li>
+    <li><strong>Referencia o código de comprobante bancario:</strong> para verificar pagos realizados mediante depósito o transferencia.</li>
+  </ul>
+
+  <p>
+    No solicitamos correo electrónico, contraseñas bancarias,
+    números de tarjetas de crédito, códigos de seguridad
+    ni credenciales de acceso a servicios financieros.
+  </p>
+
+  <p>
+    El cliente debe evitar enviar información financiera
+    adicional que no sea necesaria para verificar su pago.
+    Cuando comparta imágenes de comprobantes, se recomienda
+    ocultar saldos, movimientos u otros datos que no sean
+    relevantes para la operación.
+  </p>
+
+  <h3>Finalidad del uso de la información</h3>
+
+  <p>
+    La información proporcionada voluntariamente por el cliente
+    será utilizada exclusivamente para las siguientes finalidades:
+  </p>
+
+  <ul>
+    <li>Atender consultas relacionadas con productos y servicios.</li>
+    <li>Identificar y gestionar pedidos solicitados expresamente.</li>
+    <li>Verificar pagos y comprobantes de depósitos o transferencias.</li>
+    <li>Coordinar la preparación, despacho y entrega de los productos.</li>
+    <li>Resolver dudas, incidencias, garantías y reclamaciones relacionadas con una compra.</li>
+    <li>Cumplir las obligaciones comerciales, contables y tributarias que correspondan.</li>
+  </ul>
+
+  <div class="privacy-note">
+    <strong>Sin publicidad no solicitada:</strong>
+    Joyería Itzayana no utiliza los números telefónicos
+    ni la información de sus compradores para enviar
+    promociones, publicidad masiva, ofertas comerciales
+    o mensajes de marketing no solicitados.
+  </div>
+
+  <h3>Compartición de información con terceros</h3>
+
+  <p>
+    Joyería Itzayana no vende, alquila ni comercializa
+    la información personal de sus clientes.
+  </p>
+
+  <p>
+    Cuando un pedido requiere envío a domicilio, los datos
+    estrictamente necesarios para realizar la entrega,
+    principalmente nombre, dirección y número telefónico,
+    podrán compartirse con la empresa de mensajería
+    <strong>GuateExpress</strong>.
+  </p>
+
+  <p>
+    Esta información se comparte exclusivamente para gestionar
+    el transporte, comunicación y entrega del producto solicitado.
+    El tratamiento posterior de esos datos por parte de la empresa
+    de mensajería estará sujeto a sus propias condiciones
+    y responsabilidades.
+  </p>
+
+  <p>
+    También podrán comunicarse datos a entidades bancarias,
+    autoridades tributarias, administrativas o judiciales
+    cuando resulte necesario para verificar operaciones,
+    cumplir obligaciones legales o atender requerimientos
+    emitidos por autoridad competente.
+  </p>
+
+  <h3>8. Conservación y almacenamiento de información</h3>
+
+  <p>
+    La información relacionada con los pedidos se conserva
+    principalmente en el historial de conversaciones de
+    WhatsApp Business utilizado por Joyería Itzayana.
+  </p>
+
+  <p>
+    Actualmente, el negocio no mantiene una base de datos
+    propia de clientes, no utiliza sistemas CRM y no tiene
+    configuradas copias de seguridad propias de las
+    conversaciones de WhatsApp Business.
+  </p>
+
+  <p>
+    Los datos se conservarán únicamente durante el tiempo
+    necesario para atender las finalidades descritas
+    en esta política y cumplir las obligaciones legales
+    aplicables.
+  </p>
+
+  <p>
+    Como criterio de gestión, los pedidos antiguos serán
+    revisados periódicamente para determinar si todavía
+    existe una necesidad comercial, legal o administrativa
+    de conservar su información.
+  </p>
+
+  <p>
+    Cuando corresponda, los documentos y registros
+    relacionados con operaciones comerciales se conservarán
+    durante los plazos establecidos por la legislación
+    guatemalteca. En particular, se tendrán en cuenta
+    las obligaciones de conservación documental mercantil
+    y tributaria.
+  </p>
+
+  <p>
+    La conservación de comprobantes y registros necesarios
+    para justificar operaciones comerciales o tributarias
+    puede impedir su eliminación inmediata, incluso
+    cuando el cliente solicite borrar una conversación.
+  </p>
+
+  <h3>9. Seguridad de la información</h3>
+
+  <p>
+    Joyería Itzayana procura limitar la información solicitada
+    a los datos necesarios para atender cada pedido
+    y evitar su utilización para finalidades diferentes
+    de las indicadas en esta política.
+  </p>
+
+  <p>
+    La información recibida mediante WhatsApp Business
+    se encuentra sujeta a las medidas de seguridad,
+    configuraciones y condiciones técnicas ofrecidas
+    por dicha plataforma y por los dispositivos utilizados.
+  </p>
+
+  <p>
+    Aunque se adoptan medidas razonables para proteger
+    la información bajo nuestro control, no es posible
+    garantizar la seguridad absoluta de las comunicaciones
+    electrónicas, redes, dispositivos o servicios externos.
+  </p>
+
+  <p>
+    Joyería Itzayana no será responsable de incidentes
+    atribuibles exclusivamente a fallos de terceros,
+    servicios tecnológicos externos o circunstancias
+    fuera de su control razonable, sin perjuicio de las
+    responsabilidades que legalmente le correspondan
+    por sus propios actos u omisiones.
+  </p>
+
+  <h3>Solicitud de eliminación de datos personales</h3>
+
+  <p>
+    Los clientes podrán solicitar la eliminación de la
+    información personal que hayan proporcionado a
+    Joyería Itzayana mediante una comunicación directa
+    al número de WhatsApp o teléfono publicado en el catálogo.
+  </p>
+
+  <p>
+    Una vez recibida la solicitud, se revisará la información
+    correspondiente y se procederá a eliminar los datos
+    que se encuentren bajo nuestro control, siempre que
+    no exista una obligación legal de conservación
+    o una necesidad legítima de mantenerlos para atender
+    obligaciones comerciales, tributarias o reclamaciones
+    pendientes.
+  </p>
+
+  <p>
+    Cuando sea técnicamente posible, se utilizarán las
+    funciones disponibles de WhatsApp para eliminar
+    los mensajes o conversaciones correspondientes.
+  </p>
+
+  <p>
+    No obstante, Joyería Itzayana no puede garantizar
+    la eliminación de copias, capturas de pantalla,
+    mensajes previamente descargados, información
+    almacenada por el destinatario ni registros conservados
+    por WhatsApp, Meta, GuateExpress, entidades bancarias
+    u otros proveedores externos.
+  </p>
+
+  <p>
+    La eliminación de una conversación no implica
+    necesariamente la eliminación de documentos
+    contables o registros que deban conservarse
+    conforme a la legislación aplicable.
+  </p>
+
+  <h3>Clientes menores de edad</h3>
+
+  <p>
+    El catálogo puede ser consultado libremente por visitantes
+    de cualquier edad. Sin embargo, los pedidos y operaciones
+    comerciales deberán ser realizados por personas mayores
+    de dieciocho (18) años.
+  </p>
+
+  <p>
+    Cuando un producto esté destinado a un menor de edad,
+    el pedido deberá ser gestionado por su padre, madre
+    o representante legal, quien asumirá la comunicación
+    comercial y proporcionará los datos necesarios
+    para realizar la compra y coordinar la entrega.
+  </p>
+
+  <p>
+    Joyería Itzayana podrá solicitar confirmación adicional
+    de la intervención del representante legal cuando
+    las circunstancias del pedido lo hagan necesario.
+  </p>
+
+  <h3>Derechos y solicitudes de los clientes</h3>
+
+  <p>
+    Los clientes pueden comunicarse con Joyería Itzayana
+    para solicitar información sobre el tratamiento de
+    los datos que hayan proporcionado, corregir información
+    incorrecta, solicitar su eliminación cuando proceda
+    o plantear cualquier inquietud relacionada con
+    su privacidad.
+  </p>
+
+  <p>
+    Las solicitudes serán evaluadas de acuerdo con las
+    circunstancias del caso y la legislación aplicable
+    en la República de Guatemala.
+  </p>
+
+  <h3>Legislación aplicable</h3>
+
+  <p>
+    Esta Política de Privacidad se interpreta de conformidad
+    con las leyes vigentes de la República de Guatemala.
+  </p>
+
+  <p>
+    En lo que corresponda, se tendrán en consideración
+    las disposiciones de la Constitución Política de la
+    República de Guatemala, el Código Civil, el Código
+    de Comercio, el Código Tributario y la Ley de Protección
+    al Consumidor y Usuario, Decreto 06-2003, así como
+    cualquier otra normativa aplicable.
+  </p>
+
+  <p>
+    Ninguna disposición de esta política pretende limitar,
+    excluir o desconocer los derechos irrenunciables
+    de los consumidores ni las responsabilidades
+    que legalmente correspondan a Joyería Itzayana.
+  </p>
+
+  <h3>Modificaciones de esta política</h3>
+
+  <p>
+    Joyería Itzayana se reserva el derecho de actualizar
+    esta Política de Privacidad cuando existan cambios
+    en el funcionamiento del catálogo, los procedimientos
+    comerciales, los servicios tecnológicos utilizados
+    o las disposiciones legales aplicables.
+  </p>
+
+  <p>
+    Cualquier modificación será publicada en esta misma
+    sección, indicando la fecha de su última actualización.
+  </p>
+
+  <h3>Contacto</h3>
+
+  <p>
+    Para consultas, solicitudes de eliminación de datos
+    o cualquier asunto relacionado con esta Política
+    de Privacidad, puede comunicarse directamente con:
+  </p>
+
+  <ul>
+    <li><strong>Negocio:</strong> Joyería Itzayana.</li>
+    <li><strong>Dirección:</strong> [DIRECCIÓN FÍSICA DEL NEGOCIO].</li>
+    <li><strong>Teléfono y WhatsApp:</strong> Número publicado en el catálogo.</li>
+    <li><strong>Ubicación:</strong> República de Guatemala.</li>
+  </ul>p>`
+      }
+    };
+
+    function abrirPolitica(tipo) {
+      const policy = textosLegales[tipo];
+      if (!policy) return;
+      $('#policy-title').textContent = policy.title;
+      $('#policy-content').innerHTML = policy.body;
+      $('#policy-overlay').hidden = false;
+      document.body.style.overflow = 'hidden';
+    }
+    function cerrarPolitica() {
+      $('#policy-overlay').hidden = true;
+      document.body.style.overflow = '';
+    }
+
+    // Eventos delegados
+    document.addEventListener('click', event => {
+      const category = event.target.closest('[data-category]');
+      if (category) return filtrarCategoria(category.dataset.category);
+
+      const share = event.target.closest('[data-share]');
+      if (share) return compartirProducto(share.dataset.share);
+
+      const add = event.target.closest('[data-add]');
+      if (add) return agregarAlCarrito(add.dataset.add);
+
+      const quantity = event.target.closest('[data-quantity]');
+      if (quantity) return cambiarCantidad(quantity.dataset.sku, Number(quantity.dataset.quantity));
+
+      const remove = event.target.closest('[data-remove]');
+      if (remove) return eliminarDelCarrito(remove.dataset.remove);
+
+      const image = event.target.closest('[data-image]');
+      if (image) return agrandarImagen(image.dataset.image);
+
+      const policy = event.target.closest('[data-policy]');
+      if (policy) return abrirPolitica(policy.dataset.policy);
+    });
+
+    document.addEventListener('keydown', event => {
+      if (event.key === 'Escape') {
+        cerrarSidebar();
+        cerrarCarrito();
+        cerrarImagen();
+        cerrarPolitica();
+      }
+      if ((event.key === 'Enter' || event.key === ' ') && event.target.matches('.product-image-wrap')) {
+        event.preventDefault();
+        agrandarImagen(event.target.dataset.image);
+      }
+    });
+
+    $('#open-sidebar').addEventListener('click', abrirSidebar);
+    $('#close-sidebar').addEventListener('click', cerrarSidebar);
+    $('#sidebar-overlay').addEventListener('click', event => {
+      if (event.target === $('#sidebar-overlay')) cerrarSidebar();
+    });
+
+    $('#open-cart').addEventListener('click', abrirCarrito);
+    $('#close-cart').addEventListener('click', cerrarCarrito);
+    $('#cart-overlay').addEventListener('click', event => {
+      if (event.target === $('#cart-overlay')) cerrarCarrito();
+    });
+    $('#checkout').addEventListener('click', enviarPedidoCarrito);
+    $('#age-confirmation').addEventListener('change', () => {
+      $('#checkout').disabled = !carrito.length || !$('#age-confirmation').checked;
+    });
+
+    document.querySelectorAll('input[name="orden-precio"]').forEach(input => {
+      input.addEventListener('change', () => {
+        ordenPrecio = input.value;
+        filtrarCategoria(categoriaActual);
+      });
+    });
+
+    $('#close-image').addEventListener('click', cerrarImagen);
+    $('#image-overlay').addEventListener('click', event => {
+      if (event.target === $('#image-overlay')) cerrarImagen();
+    });
+    $('#close-policy').addEventListener('click', cerrarPolitica);
+    $('#policy-overlay').addEventListener('click', event => {
+      if (event.target === $('#policy-overlay')) cerrarPolitica();
+    });
+
+    // WhatsApp general
+    $('#btn-wa-general').href = `https://wa.me/${NUMERO_WHATSAPP}?text=${encodeURIComponent('Hola, quisiera más información sobre el catálogo de Joyería Itzayana.')}`;
+    $('#year').textContent = new Date().getFullYear();
+    cargarCatalogo();
+  </script>
 </body>
 </html>
